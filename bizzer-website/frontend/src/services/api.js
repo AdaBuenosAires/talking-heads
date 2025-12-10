@@ -1,6 +1,4 @@
 import axios from 'axios'
-import { store } from '../store'
-import { refreshToken, logout } from '../store/slices/authSlice'
 
 const API_URL = import.meta.env.VITE_API_URL || '/api'
 
@@ -11,9 +9,15 @@ const api = axios.create({
   },
 })
 
+// Lazy import to avoid circular dependency
+// store -> authSlice -> authService -> api -> store
+const getStore = () => require('../store').store
+const getAuthActions = () => require('../store/slices/authSlice')
+
 // Request interceptor - Add auth token
 api.interceptors.request.use(
   (config) => {
+    const store = getStore()
     const state = store.getState()
     const token = state.auth.tokens?.access
 
@@ -41,6 +45,8 @@ api.interceptors.response.use(
       originalRequest._retry = true
 
       try {
+        const store = getStore()
+        const { refreshToken, logout } = getAuthActions()
         const result = await store.dispatch(refreshToken())
 
         if (refreshToken.fulfilled.match(result)) {
@@ -51,6 +57,8 @@ api.interceptors.response.use(
         }
       } catch (refreshError) {
         // Refresh failed, logout user
+        const store = getStore()
+        const { logout } = getAuthActions()
         store.dispatch(logout())
         return Promise.reject(refreshError)
       }
