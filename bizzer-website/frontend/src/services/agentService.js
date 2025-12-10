@@ -1,5 +1,4 @@
 import axios from 'axios'
-import { store } from '../store'
 
 const AGENTS_URL = import.meta.env.VITE_AGENTS_URL || '/agents'
 
@@ -10,20 +9,21 @@ const agentApi = axios.create({
   },
 })
 
+// Lazy import to avoid circular dependency
+const getStore = () => require('../store').store
+
 // Request interceptor - Add auth token
 agentApi.interceptors.request.use(
   (config) => {
+    const store = getStore()
     const state = store.getState()
     const token = state.auth.tokens?.access
-
     if (token) {
       config.headers.Authorization = `Bearer ${token}`
     }
-
     // Add language header
     const language = state.language?.language || 'es'
     config.headers['Accept-Language'] = language
-
     return config
   },
   (error) => Promise.reject(error)
@@ -52,7 +52,6 @@ const agentService = {
     const formData = new FormData()
     formData.append('file', file)
     formData.append('metadata', JSON.stringify(metadata))
-
     const response = await agentApi.post('/knowledge/upload/', formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
