@@ -62,7 +62,8 @@ This repository contains:
 
 3. **Start development environment**
    ```bash
-   docker-compose -f docker-compose.yml -f docker-compose.dev.yml up -d
+   docker compose -f docker-compose.yml -f docker-compose.dev.yml up -d
+
    ```
 
 4. **Access the services**
