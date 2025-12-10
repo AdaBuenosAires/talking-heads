@@ -1,7 +1,7 @@
 """
 Document Processor for RAG
 """
-
+from typing import Optional, Dict
 import uuid
 from typing import List, Dict, Any
 from fastapi import UploadFile
