@@ -3,7 +3,7 @@ Document Processor for RAG
 """
 
 import uuid
-from typing import List, Dict, Any
+from typing import List, Dict, Any, Optional
 from fastapi import UploadFile
 from app.rag.retriever import RAGRetriever
 
@@ -112,7 +112,3 @@ class DocumentProcessor:
             "doc_id": doc_id,
             "chunks_created": len(chunks),
         }
-
-
-# Make Optional available
-from typing import Optional
