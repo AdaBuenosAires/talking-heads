@@ -1,0 +1,173 @@
+{
+  "common": {
+    "loading": "Loading...",
+    "error": "An error occurred",
+    "retry": "Retry",
+    "save": "Save",
+    "cancel": "Cancel",
+    "continue": "Continue",
+    "back": "Back",
+    "next": "Next",
+    "submit": "Submit",
+    "finish": "Finish",
+    "close": "Close",
+    "learnMore": "Learn More"
+  },
+  "nav": {
+    "home": "Home",
+    "freeTrial": "Free Trial",
+    "login": "Login",
+    "register": "Register",
+    "dashboard": "Dashboard",
+    "logout": "Logout"
+  },
+  "home": {
+    "hero": {
+      "title": "Smart Solutions for Corporate Compliance",
+      "subtitle": "Discover how our technology platform can transform your compliance and governance management",
+      "cta": "Start Free Diagnosis",
+      "ctaSecondary": "Learn More"
+    },
+    "features": {
+      "title": "Our Solutions",
+      "subtitle": "Specialized tools for every compliance need",
+      "dataRoom": {
+        "title": "Data Room for Audits",
+        "description": "Share documentation securely and efficiently with auditors"
+      },
+      "gapAnalysis": {
+        "title": "Gap Analysis",
+        "description": "Identify documentation gaps for your expansion"
+      },
+      "dealTeaser": {
+        "title": "Deal Teaser",
+        "description": "Prepare professional tender offers"
+      },
+      "dealVisor": {
+        "title": "Deal Visor",
+        "description": "Monitor your contracts in execution"
+      }
+    },
+    "benefits": {
+      "title": "Why Bizzer?",
+      "security": "Enterprise-grade security",
+      "automation": "Process automation",
+      "integration": "Easy integration",
+      "support": "Dedicated support"
+    },
+    "cta": {
+      "title": "Ready to transform your compliance?",
+      "subtitle": "Take our free diagnostic to discover the ideal solution for your business",
+      "button": "Start Now"
+    }
+  },
+  "auth": {
+    "login": {
+      "title": "Welcome Back",
+      "subtitle": "Sign in to continue to your dashboard",
+      "email": "Email",
+      "password": "Password",
+      "submit": "Sign In",
+      "forgotPassword": "Forgot password?",
+      "noAccount": "Don't have an account?",
+      "register": "Register"
+    },
+    "register": {
+      "title": "Create Your Account",
+      "subtitle": "Join Bizzer to discover your ideal compliance solution",
+      "firstName": "First Name",
+      "lastName": "Last Name",
+      "email": "Email",
+      "password": "Password",
+      "confirmPassword": "Confirm Password",
+      "company": "Company",
+      "companySize": "Company Size",
+      "industry": "Industry",
+      "phone": "Phone (optional)",
+      "jobTitle": "Job Title (optional)",
+      "terms": "I accept the",
+      "termsLink": "Terms of Service",
+      "privacy": "and the",
+      "privacyLink": "Privacy Policy",
+      "marketing": "I want to receive updates and news",
+      "submit": "Create Account",
+      "hasAccount": "Already have an account?",
+      "login": "Sign In"
+    },
+    "companySizes": {
+      "startup": "Startup (1-10)",
+      "pyme": "SMB (11-100)",
+      "midmarket": "Midmarket (101-500)",
+      "enterprise": "Enterprise (500+)"
+    },
+    "industries": {
+      "finance": "Financial Services",
+      "tech": "Technology",
+      "legal": "Legal",
+      "accounting": "Accounting",
+      "healthcare": "Healthcare",
+      "manufacturing": "Manufacturing",
+      "public": "Public Sector",
+      "other": "Other"
+    }
+  },
+  "wizard": {
+    "title": "Business Diagnosis",
+    "subtitle": "Answer a few questions to discover the ideal solution for your needs",
+    "step": "Step",
+    "of": "of",
+    "quickWin": "Quick Win",
+    "progress": "Progress",
+    "placeholder": "Type your answer here...",
+    "analyzing": "Analyzing your responses..."
+  },
+  "diagnosis": {
+    "title": "Your Personalized Diagnosis",
+    "recommended": "Recommended Solution",
+    "summary": "Summary",
+    "features": "Key Features",
+    "nextSteps": "Next Steps",
+    "urgency": "Urgency Level",
+    "fit": "Fit Score",
+    "secondary": "Other Recommended Solutions",
+    "scheduleDemo": "Schedule Demo",
+    "downloadReport": "Download Report",
+    "goToDashboard": "Go to Dashboard"
+  },
+  "dashboard": {
+    "welcome": "Welcome",
+    "yourDiagnosis": "Your Diagnosis",
+    "nodiagnosis": "You haven't completed a diagnosis yet",
+    "startDiagnosis": "Start Diagnosis",
+    "interactions": "Recent Interactions",
+    "noInteractions": "No recent interactions",
+    "quickActions": "Quick Actions",
+    "scheduleCall": "Schedule a Call",
+    "downloadDocs": "Download Documentation",
+    "contactSupport": "Contact Support"
+  },
+  "chat": {
+    "title": "Chat with Bizzer",
+    "placeholder": "Type a message...",
+    "send": "Send",
+    "welcome": "Hello! I'm Bizzer's virtual assistant. How can I help you today?"
+  },
+  "footer": {
+    "about": "About",
+    "solutions": "Solutions",
+    "resources": "Resources",
+    "company": "Company",
+    "legal": "Legal",
+    "terms": "Terms of Service",
+    "privacy": "Privacy Policy",
+    "cookies": "Cookie Policy",
+    "contact": "Contact",
+    "copyright": "All rights reserved"
+  },
+  "cookies": {
+    "message": "We use cookies to improve your experience. By continuing to use this site, you accept our",
+    "policy": "cookie policy",
+    "accept": "Accept",
+    "decline": "Decline"
+  }
+}

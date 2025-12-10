@@ -1,0 +1,173 @@
+{
+  "common": {
+    "loading": "Cargando...",
+    "error": "Ocurrió un error",
+    "retry": "Reintentar",
+    "save": "Guardar",
+    "cancel": "Cancelar",
+    "continue": "Continuar",
+    "back": "Volver",
+    "next": "Siguiente",
+    "submit": "Enviar",
+    "finish": "Finalizar",
+    "close": "Cerrar",
+    "learnMore": "Más información"
+  },
+  "nav": {
+    "home": "Inicio",
+    "freeTrial": "Prueba Gratis",
+    "login": "Iniciar Sesión",
+    "register": "Registrarse",
+    "dashboard": "Panel",
+    "logout": "Cerrar Sesión"
+  },
+  "home": {
+    "hero": {
+      "title": "Soluciones Inteligentes para Compliance Corporativo",
+      "subtitle": "Descubre cómo nuestra plataforma tecnológica puede transformar tu gestión de compliance y gobernanza",
+      "cta": "Iniciar Diagnóstico Gratis",
+      "ctaSecondary": "Más Información"
+    },
+    "features": {
+      "title": "Nuestras Soluciones",
+      "subtitle": "Herramientas especializadas para cada necesidad de compliance",
+      "dataRoom": {
+        "title": "Data Room para Auditorías",
+        "description": "Comparte documentación de forma segura y eficiente con auditores"
+      },
+      "gapAnalysis": {
+        "title": "Gap Analysis",
+        "description": "Identifica gaps documentales para tu expansión"
+      },
+      "dealTeaser": {
+        "title": "Deal Teaser",
+        "description": "Prepara ofertas de licitación profesionales"
+      },
+      "dealVisor": {
+        "title": "Deal Visor",
+        "description": "Monitorea tus contratos en ejecución"
+      }
+    },
+    "benefits": {
+      "title": "¿Por qué Bizzer?",
+      "security": "Seguridad empresarial",
+      "automation": "Automatización de procesos",
+      "integration": "Fácil integración",
+      "support": "Soporte dedicado"
+    },
+    "cta": {
+      "title": "¿Listo para transformar tu compliance?",
+      "subtitle": "Realiza nuestro diagnóstico gratuito para descubrir la solución ideal para tu negocio",
+      "button": "Comenzar Ahora"
+    }
+  },
+  "auth": {
+    "login": {
+      "title": "Bienvenido de vuelta",
+      "subtitle": "Inicia sesión para continuar a tu panel",
+      "email": "Correo electrónico",
+      "password": "Contraseña",
+      "submit": "Iniciar Sesión",
+      "forgotPassword": "¿Olvidaste tu contraseña?",
+      "noAccount": "¿No tienes cuenta?",
+      "register": "Regístrate"
+    },
+    "register": {
+      "title": "Crea tu Cuenta",
+      "subtitle": "Únete a Bizzer para descubrir tu solución ideal de compliance",
+      "firstName": "Nombre",
+      "lastName": "Apellido",
+      "email": "Correo electrónico",
+      "password": "Contraseña",
+      "confirmPassword": "Confirmar Contraseña",
+      "company": "Empresa",
+      "companySize": "Tamaño de la Empresa",
+      "industry": "Industria",
+      "phone": "Teléfono (opcional)",
+      "jobTitle": "Cargo (opcional)",
+      "terms": "Acepto los",
+      "termsLink": "Términos de Servicio",
+      "privacy": "y la",
+      "privacyLink": "Política de Privacidad",
+      "marketing": "Quiero recibir actualizaciones y novedades",
+      "submit": "Crear Cuenta",
+      "hasAccount": "¿Ya tienes cuenta?",
+      "login": "Inicia Sesión"
+    },
+    "companySizes": {
+      "startup": "Startup (1-10)",
+      "pyme": "PyME (11-100)",
+      "midmarket": "Midmarket (101-500)",
+      "enterprise": "Enterprise (500+)"
+    },
+    "industries": {
+      "finance": "Servicios Financieros",
+      "tech": "Tecnología",
+      "legal": "Legal",
+      "accounting": "Contabilidad",
+      "healthcare": "Salud",
+      "manufacturing": "Manufactura",
+      "public": "Sector Público",
+      "other": "Otra"
+    }
+  },
+  "wizard": {
+    "title": "Diagnóstico de Negocio",
+    "subtitle": "Responde algunas preguntas para descubrir la solución ideal para tus necesidades",
+    "step": "Paso",
+    "of": "de",
+    "quickWin": "Quick Win",
+    "progress": "Progreso",
+    "placeholder": "Escribe tu respuesta aquí...",
+    "analyzing": "Analizando tus respuestas..."
+  },
+  "diagnosis": {
+    "title": "Tu Diagnóstico Personalizado",
+    "recommended": "Solución Recomendada",
+    "summary": "Resumen",
+    "features": "Características Principales",
+    "nextSteps": "Próximos Pasos",
+    "urgency": "Nivel de Urgencia",
+    "fit": "Score de Ajuste",
+    "secondary": "Otras Soluciones Recomendadas",
+    "scheduleDemo": "Agendar Demo",
+    "downloadReport": "Descargar Reporte",
+    "goToDashboard": "Ir al Panel"
+  },
+  "dashboard": {
+    "welcome": "Bienvenido",
+    "yourDiagnosis": "Tu Diagnóstico",
+    "noDiagnosis": "Aún no has completado un diagnóstico",
+    "startDiagnosis": "Iniciar Diagnóstico",
+    "interactions": "Interacciones Recientes",
+    "noInteractions": "Sin interacciones recientes",
+    "quickActions": "Acciones Rápidas",
+    "scheduleCall": "Agendar Llamada",
+    "downloadDocs": "Descargar Documentación",
+    "contactSupport": "Contactar Soporte"
+  },
+  "chat": {
+    "title": "Chat con Bizzer",
+    "placeholder": "Escribe un mensaje...",
+    "send": "Enviar",
+    "welcome": "¡Hola! Soy el asistente virtual de Bizzer. ¿En qué puedo ayudarte hoy?"
+  },
+  "footer": {
+    "about": "Acerca de",
+    "solutions": "Soluciones",
+    "resources": "Recursos",
+    "company": "Empresa",
+    "legal": "Legal",
+    "terms": "Términos de Servicio",
+    "privacy": "Política de Privacidad",
+    "cookies": "Política de Cookies",
+    "contact": "Contacto",
+    "copyright": "Todos los derechos reservados"
+  },
+  "cookies": {
+    "message": "Usamos cookies para mejorar tu experiencia. Al continuar usando este sitio, aceptas nuestra",
+    "policy": "política de cookies",
+    "accept": "Aceptar",
+    "decline": "Rechazar"
+  }
+}

@@ -1,0 +1,61 @@
+version: '3.8'
+
+# Development overrides
+# Usage: docker-compose -f docker-compose.yml -f docker-compose.dev.yml up
+
+services:
+  db:
+    ports:
+      - "5432:5432"
+
+  redis:
+    ports:
+      - "6379:6379"
+
+  website-backend:
+    build:
+      context: ./bizzer-website/backend
+      dockerfile: Dockerfile
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - ./bizzer-website/backend:/app
+      - website_static:/app/staticfiles
+      - website_media:/app/media
+    environment:
+      - DJANGO_SETTINGS_MODULE=config.settings.development
+      - DEBUG=True
+    ports:
+      - "8000:8000"
+
+  website-frontend:
+    build:
+      context: ./bizzer-website/frontend
+      dockerfile: Dockerfile
+    command: npm run dev -- --host 0.0.0.0
+    volumes:
+      - ./bizzer-website/frontend:/app
+      - /app/node_modules
+    ports:
+      - "3000:3000"
+    environment:
+      - VITE_API_URL=http://localhost:8000/api
+      - VITE_AGENTS_URL=http://localhost:8001
+
+  agents:
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8001 --reload
+    volumes:
+      - ./bizzer-agents:/app
+      - agents_data:/app/data
+    ports:
+      - "8001:8001"
+    environment:
+      - DEBUG=True
+
+  ollama:
+    ports:
+      - "11434:11434"
+
+  # Disable nginx in development
+  nginx:
+    profiles:
+      - production

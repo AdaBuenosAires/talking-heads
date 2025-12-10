@@ -1,0 +1,151 @@
+version: '3.8'
+
+services:
+  # ============ DATABASES ============
+  db:
+    image: postgres:15-alpine
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init-db.sql:/docker-entrypoint-initdb.d/init.sql
+    environment:
+      - POSTGRES_DB=${POSTGRES_DB:-bizzer}
+      - POSTGRES_USER=${POSTGRES_USER:-bizzer}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-password}
+    networks:
+      - bizzer_network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-bizzer}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    volumes:
+      - redis_data:/data
+    networks:
+      - bizzer_network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  # ============ BIZZER WEBSITE ============
+  website-backend:
+    build:
+      context: ./bizzer-website/backend
+      dockerfile: Dockerfile
+    command: gunicorn config.wsgi:application --bind 0.0.0.0:8000 --workers 3
+    volumes:
+      - website_static:/app/staticfiles
+      - website_media:/app/media
+    environment:
+      - DJANGO_SETTINGS_MODULE=config.settings.production
+      - POSTGRES_DB=${POSTGRES_DB:-bizzer}
+      - POSTGRES_USER=${POSTGRES_USER:-bizzer}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-password}
+      - POSTGRES_HOST=db
+      - REDIS_URL=redis://redis:6379/0
+      - SECRET_KEY=${SECRET_KEY}
+      - ALLOWED_HOSTS=${ALLOWED_HOSTS:-localhost,127.0.0.1}
+      - AGENTS_API_URL=http://agents:8001
+      - CORS_ALLOWED_ORIGINS=${CORS_ALLOWED_ORIGINS:-http://localhost}
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - bizzer_network
+    restart: unless-stopped
+
+  website-frontend:
+    build:
+      context: ./bizzer-website/frontend
+      dockerfile: Dockerfile
+      args:
+        - VITE_API_URL=${VITE_API_URL:-/api}
+        - VITE_AGENTS_URL=${VITE_AGENTS_URL:-/agents}
+    networks:
+      - bizzer_network
+    restart: unless-stopped
+
+  # ============ BIZZER AGENTS ============
+  ollama:
+    image: ollama/ollama:latest
+    volumes:
+      - ollama_data:/root/.ollama
+    networks:
+      - bizzer_network
+    restart: unless-stopped
+    # Uncomment below for GPU support
+    # deploy:
+    #   resources:
+    #     reservations:
+    #       devices:
+    #         - driver: nvidia
+    #           count: all
+    #           capabilities: [gpu]
+
+  agents:
+    build:
+      context: ./bizzer-agents
+      dockerfile: Dockerfile
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8001 --workers 2
+    volumes:
+      - agents_data:/app/data
+      - ./bizzer-agents/app/knowledge_base:/app/knowledge_base
+    environment:
+      - LLM_PROVIDER=${LLM_PROVIDER:-ollama}
+      - OLLAMA_BASE_URL=http://ollama:11434
+      - OLLAMA_MODEL=${OLLAMA_MODEL:-gemma2:2b}
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY:-}
+      - OPENAI_API_KEY=${OPENAI_API_KEY:-}
+      - REDIS_URL=redis://redis:6379/1
+      - DATABASE_URL=postgresql://${POSTGRES_USER:-bizzer}:${POSTGRES_PASSWORD:-password}@db:5432/bizzer_agents
+      - JWT_SECRET=${SECRET_KEY}
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      ollama:
+        condition: service_started
+    networks:
+      - bizzer_network
+    restart: unless-stopped
+
+  # ============ REVERSE PROXY ============
+  nginx:
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - website_static:/app/staticfiles:ro
+      - website_media:/app/media:ro
+      - ./nginx/ssl:/etc/nginx/ssl:ro
+    depends_on:
+      - website-backend
+      - website-frontend
+      - agents
+    networks:
+      - bizzer_network
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+  redis_data:
+  website_static:
+  website_media:
+  agents_data:
+  ollama_data:
+
+networks:
+  bizzer_network:
+    driver: bridge

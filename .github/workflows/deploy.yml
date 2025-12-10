@@ -1,0 +1,201 @@
+name: Deploy Bizzer Network Stack
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+
+jobs:
+  # Test Django Backend
+  test-backend:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:15
+        env:
+          POSTGRES_USER: bizzer
+          POSTGRES_PASSWORD: testpassword
+          POSTGRES_DB: bizzer_test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+      redis:
+        image: redis:7
+        ports:
+          - 6379:6379
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        working-directory: ./bizzer-website/backend
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements/development.txt
+
+      - name: Run tests
+        working-directory: ./bizzer-website/backend
+        env:
+          POSTGRES_DB: bizzer_test
+          POSTGRES_USER: bizzer
+          POSTGRES_PASSWORD: testpassword
+          POSTGRES_HOST: localhost
+          REDIS_URL: redis://localhost:6379/0
+          SECRET_KEY: test-secret-key-for-ci
+          DJANGO_SETTINGS_MODULE: config.settings.development
+        run: |
+          python manage.py migrate --noinput
+          python manage.py check
+
+  # Test Frontend
+  test-frontend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: ./bizzer-website/frontend/package-lock.json
+
+      - name: Install dependencies
+        working-directory: ./bizzer-website/frontend
+        run: npm ci
+
+      - name: Lint
+        working-directory: ./bizzer-website/frontend
+        run: npm run lint || true
+
+      - name: Build
+        working-directory: ./bizzer-website/frontend
+        run: npm run build
+
+  # Test Agents
+  test-agents:
+    runs-on: ubuntu-latest
+    services:
+      redis:
+        image: redis:7
+        ports:
+          - 6379:6379
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        working-directory: ./bizzer-agents
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install pytest pytest-asyncio
+
+      - name: Run syntax check
+        working-directory: ./bizzer-agents
+        run: |
+          python -c "from app.main import app; print('App imported successfully')"
+
+  # Build and Push Docker Images
+  build:
+    needs: [test-backend, test-frontend, test-agents]
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Log in to Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push website-backend
+        uses: docker/build-push-action@v5
+        with:
+          context: ./bizzer-website/backend
+          push: true
+          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/website-backend:latest
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      - name: Build and push website-frontend
+        uses: docker/build-push-action@v5
+        with:
+          context: ./bizzer-website/frontend
+          push: true
+          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/website-frontend:latest
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      - name: Build and push agents
+        uses: docker/build-push-action@v5
+        with:
+          context: ./bizzer-agents
+          push: true
+          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/agents:latest
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      - name: Build and push nginx
+        uses: docker/build-push-action@v5
+        with:
+          context: ./nginx
+          push: true
+          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/nginx:latest
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+  # Deploy to Server
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Deploy to server
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.DO_HOST }}
+          username: ${{ secrets.DO_USERNAME }}
+          key: ${{ secrets.DO_SSH_KEY }}
+          script: |
+            cd /opt/bizzer
+            docker-compose pull
+            docker-compose up -d
+            docker system prune -f

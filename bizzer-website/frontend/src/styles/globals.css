@@ -1,0 +1,150 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Base styles */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply font-body text-body;
+  }
+
+  h1 {
+    @apply font-display text-display-1;
+  }
+
+  h2 {
+    @apply font-display text-display-2;
+  }
+
+  h3 {
+    @apply font-display text-display-3;
+  }
+
+  /* Focus styles */
+  *:focus-visible {
+    @apply outline-none ring-2 ring-light-accent dark:ring-dark-accent ring-offset-2;
+  }
+
+  /* Selection */
+  ::selection {
+    @apply bg-light-accent/20 dark:bg-dark-accent/20;
+  }
+}
+
+/* Component styles */
+@layer components {
+  /* Button styles */
+  .btn {
+    @apply inline-flex items-center justify-center px-6 py-3 rounded-lg font-medium transition-all duration-300;
+  }
+
+  .btn-primary {
+    @apply btn bg-light-accent dark:bg-dark-accent text-white dark:text-dark-bg hover:bg-light-accentHover dark:hover:bg-dark-accentHover;
+  }
+
+  .btn-secondary {
+    @apply btn border border-light-border dark:border-dark-border hover:bg-light-bgSecondary dark:hover:bg-dark-bgSecondary;
+  }
+
+  .btn-ghost {
+    @apply btn hover:bg-light-bgSecondary dark:hover:bg-dark-bgSecondary;
+  }
+
+  /* Card styles */
+  .card {
+    @apply bg-white dark:bg-dark-bgSecondary rounded-apple-lg p-6 shadow-apple dark:shadow-apple-dark transition-shadow duration-300 hover:shadow-apple-hover;
+  }
+
+  /* Input styles */
+  .input {
+    @apply w-full px-4 py-3 bg-light-bgSecondary dark:bg-dark-bgTertiary border border-light-border dark:border-dark-border rounded-lg transition-all duration-300 focus:ring-2 focus:ring-light-accent dark:focus:ring-dark-accent focus:border-transparent;
+  }
+
+  /* Section styles */
+  .section {
+    @apply py-20 md:py-30 px-4 md:px-8;
+  }
+
+  .container-narrow {
+    @apply max-w-3xl mx-auto;
+  }
+
+  .container-wide {
+    @apply max-w-6xl mx-auto;
+  }
+
+  /* Glassmorphism */
+  .glass {
+    @apply bg-white/80 dark:bg-dark-bg/80 backdrop-blur-apple;
+  }
+
+  /* Progress bar */
+  .progress-bar {
+    @apply h-1 bg-light-bgTertiary dark:bg-dark-bgTertiary rounded-full overflow-hidden;
+  }
+
+  .progress-bar-fill {
+    @apply h-full bg-light-accent dark:bg-dark-accent transition-all duration-500 ease-out;
+  }
+
+  /* Quick win card */
+  .quick-win {
+    @apply bg-gradient-to-r from-light-bgSecondary to-light-bgTertiary dark:from-dark-bgSecondary dark:to-dark-bgTertiary p-4 rounded-apple border-l-4 border-light-accent dark:border-dark-accent;
+  }
+}
+
+/* Utility styles */
+@layer utilities {
+  /* Text gradient */
+  .text-gradient {
+    @apply bg-gradient-to-r from-light-text to-light-textSecondary dark:from-dark-text dark:to-dark-textSecondary bg-clip-text text-transparent;
+  }
+
+  /* Hide scrollbar */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Smooth transitions */
+  .transition-smooth {
+    @apply transition-all duration-400 ease-out;
+  }
+}
+
+/* Animations */
+@keyframes pulse-subtle {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+.animate-pulse-subtle {
+  animation: pulse-subtle 2s ease-in-out infinite;
+}
+
+/* Chat widget styles */
+.chat-widget {
+  @apply fixed bottom-6 right-6 z-50;
+}
+
+.chat-bubble {
+  @apply w-14 h-14 rounded-full bg-light-accent dark:bg-dark-accent flex items-center justify-center cursor-pointer shadow-apple hover:shadow-apple-hover transition-all duration-300 hover:scale-105;
+}
+
+.chat-window {
+  @apply absolute bottom-20 right-0 w-96 h-[500px] bg-white dark:bg-dark-bgSecondary rounded-apple-lg shadow-apple-hover overflow-hidden flex flex-col;
+}
