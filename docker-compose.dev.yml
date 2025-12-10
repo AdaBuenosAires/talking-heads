@@ -31,6 +31,7 @@ services:
     build:
       context: ./bizzer-website/frontend
       dockerfile: Dockerfile
+      target: builder
     command: npm run dev -- --host 0.0.0.0
     volumes:
       - ./bizzer-website/frontend:/app
