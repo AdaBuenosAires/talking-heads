@@ -6,6 +6,7 @@ import { useEffect } from 'react'
 import Navbar from './components/common/Navbar'
 import Footer from './components/common/Footer'
 import CookieConsent from './components/common/CookieConsent'
+import ChatWidget from './components/chat/ChatWidget'
 
 // Pages
 import Home from './pages/Home'
@@ -77,6 +78,7 @@ function App() {
       </main>
       <Footer />
       <CookieConsent />
+      <ChatWidget />
     </div>
   )
 }
