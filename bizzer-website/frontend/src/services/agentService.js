@@ -1,5 +1,4 @@
 import axios from 'axios'
-import { store } from '../store'
 
 const AGENTS_URL = import.meta.env.VITE_AGENTS_URL || '/agents'
 
@@ -10,24 +9,14 @@ const agentApi = axios.create({
   },
 })
 
-// Request interceptor - Add auth token
-agentApi.interceptors.request.use(
-  (config) => {
-    const state = store.getState()
-    const token = state.auth.tokens?.access
-
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`
-    }
-
-    // Add language header
-    const language = state.language?.language || 'es'
-    config.headers['Accept-Language'] = language
-
-    return config
-  },
-  (error) => Promise.reject(error)
-)
+// Set auth token dynamically (avoids circular import)
+export const setAuthToken = (token) => {
+  if (token) {
+    agentApi.defaults.headers.common['Authorization'] = `Bearer ${token}`
+  } else {
+    delete agentApi.defaults.headers.common['Authorization']
+  }
+}
 
 const agentService = {
   async chat(message, sessionId = null) {
@@ -52,7 +41,6 @@ const agentService = {
     const formData = new FormData()
     formData.append('file', file)
     formData.append('metadata', JSON.stringify(metadata))
-
     const response = await agentApi.post('/knowledge/upload/', formData, {
       headers: {
         'Content-Type': 'multipart/form-data',

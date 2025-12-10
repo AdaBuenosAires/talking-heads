@@ -1,6 +1,4 @@
 import axios from 'axios'
-import { store } from '../store'
-import { refreshToken, logout } from '../store/slices/authSlice'
 
 const API_URL = import.meta.env.VITE_API_URL || '/api'
 
@@ -11,19 +9,29 @@ const api = axios.create({
   },
 })
 
+// Store reference (set after store initialization to avoid circular import)
+let storeRef = null
+let authActions = null
+
+export const initializeApi = (store, actions) => {
+  storeRef = store
+  authActions = actions
+}
+
 // Request interceptor - Add auth token
 api.interceptors.request.use(
   (config) => {
-    const state = store.getState()
-    const token = state.auth.tokens?.access
+    if (storeRef) {
+      const state = storeRef.getState()
+      const token = state.auth?.tokens?.access
 
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`
+      if (token) {
+        config.headers.Authorization = `Bearer ${token}`
+      }
+
+      const language = state.language?.language || 'es'
+      config.headers['Accept-Language'] = language
     }
-
-    // Add language header
-    const language = state.language?.language || 'es'
-    config.headers['Accept-Language'] = language
 
     return config
   },
@@ -36,22 +44,19 @@ api.interceptors.response.use(
   async (error) => {
     const originalRequest = error.config
 
-    // If 401 and not already retrying, try to refresh token
-    if (error.response?.status === 401 && !originalRequest._retry) {
+    if (error.response?.status === 401 && !originalRequest._retry && storeRef && authActions) {
       originalRequest._retry = true
 
       try {
-        const result = await store.dispatch(refreshToken())
+        const result = await storeRef.dispatch(authActions.refreshToken())
 
-        if (refreshToken.fulfilled.match(result)) {
-          // Retry original request with new token
+        if (authActions.refreshToken.fulfilled.match(result)) {
           const newToken = result.payload.access
           originalRequest.headers.Authorization = `Bearer ${newToken}`
           return api(originalRequest)
         }
       } catch (refreshError) {
-        // Refresh failed, logout user
-        store.dispatch(logout())
+        storeRef.dispatch(authActions.logout())
         return Promise.reject(refreshError)
       }
     }
