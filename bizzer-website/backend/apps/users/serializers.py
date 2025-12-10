@@ -79,6 +79,7 @@ class CustomUserSerializer(UserSerializer):
             'accepted_privacy',
             'accepted_privacy_date',
             'marketing_consent',
+            'is_bizzer_employee',
             'created_at',
             'updated_at',
         )
@@ -88,6 +89,7 @@ class CustomUserSerializer(UserSerializer):
             'lead_status',
             'accepted_terms_date',
             'accepted_privacy_date',
+            'is_bizzer_employee',
             'created_at',
             'updated_at',
         )

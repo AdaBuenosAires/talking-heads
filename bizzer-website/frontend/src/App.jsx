@@ -18,9 +18,11 @@ import Dashboard from './pages/Dashboard'
 import TermsOfService from './pages/TermsOfService'
 import PrivacyPolicy from './pages/PrivacyPolicy'
 import CookiePolicy from './pages/CookiePolicy'
+import EcosystemArchitecture from './pages/EcosystemArchitecture'
 
 // Auth
 import ProtectedRoute from './components/auth/ProtectedRoute'
+import EmployeeProtectedRoute from './components/auth/EmployeeProtectedRoute'
 
 function App() {
   const { theme } = useSelector((state) => state.theme)
@@ -71,6 +73,16 @@ function App() {
               <ProtectedRoute>
                 <Dashboard />
               </ProtectedRoute>
+            }
+          />
+
+          {/* Employee-only routes */}
+          <Route
+            path="/internal/ecosystem"
+            element={
+              <EmployeeProtectedRoute>
+                <EcosystemArchitecture />
+              </EmployeeProtectedRoute>
             }
           />
         </Routes>

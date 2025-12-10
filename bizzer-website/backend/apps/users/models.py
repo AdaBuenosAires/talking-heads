@@ -94,6 +94,12 @@ class CustomUser(AbstractUser):
         default=LeadStatus.NEW
     )
 
+    # Bizzer employee flag (managed by admin)
+    is_bizzer_employee = models.BooleanField(
+        default=False,
+        help_text='Designates whether this user is a Bizzer employee with access to internal resources.'
+    )
+
     # Timestamps
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

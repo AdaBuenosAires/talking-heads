@@ -1,9 +1,12 @@
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
+import { useSelector } from 'react-redux'
 
 export default function Footer() {
   const { t } = useTranslation()
   const currentYear = new Date().getFullYear()
+  const { isAuthenticated, user } = useSelector((state) => state.auth)
+  const isBizzerEmployee = isAuthenticated && user?.is_bizzer_employee
 
   return (
     <footer className="bg-light-bgSecondary dark:bg-dark-bgSecondary border-t border-light-border dark:border-dark-border">
@@ -57,6 +60,13 @@ export default function Footer() {
                   {t('nav.freeTrial')}
                 </Link>
               </li>
+              {isBizzerEmployee && (
+                <li>
+                  <Link to="/internal/ecosystem" className="hover:text-light-text dark:hover:text-dark-text transition-colors">
+                    {t('footer.ecosystem')}
+                  </Link>
+                </li>
+              )}
             </ul>
           </div>
 

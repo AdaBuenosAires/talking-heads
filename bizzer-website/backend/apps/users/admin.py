@@ -19,12 +19,14 @@ class CustomUserAdmin(UserAdmin):
         'company',
         'lead_status',
         'lead_score',
+        'is_bizzer_employee',
         'is_active',
         'created_at',
     )
     list_filter = (
         'is_active',
         'is_staff',
+        'is_bizzer_employee',
         'lead_status',
         'company_size',
         'industry',
@@ -60,7 +62,7 @@ class CustomUserAdmin(UserAdmin):
             'classes': ('collapse',),
         }),
         ('Permissions', {
-            'fields': ('is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions'),
+            'fields': ('is_active', 'is_staff', 'is_superuser', 'is_bizzer_employee', 'groups', 'user_permissions'),
             'classes': ('collapse',),
         }),
         ('Important Dates', {
