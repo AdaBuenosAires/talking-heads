@@ -147,10 +147,24 @@
     "contactSupport": "Contact Support"
   },
   "chat": {
-    "title": "Chat with Bizzer",
+    "title": "Bizzer Assistant",
     "placeholder": "Type a message...",
+    "placeholderGuest": "Sign in to chat...",
     "send": "Send",
-    "welcome": "Hello! I'm Bizzer's virtual assistant. How can I help you today?"
+    "clear": "Clear chat",
+    "welcome": "How can I help you today? I'm here to answer your questions about compliance and our solutions.",
+    "welcomePersonalized": "Hi {{name}}!",
+    "loginNotice": "Sign in to chat with our AI assistant",
+    "suggestions": "Frequently asked:",
+    "suggestion1": "What solutions do you offer?",
+    "suggestion2": "How does the Data Room work?",
+    "suggestion3": "I want to schedule a demo",
+    "connectionStatus": {
+      "connected": "Connected",
+      "connecting": "Connecting...",
+      "error": "Disconnected"
+    },
+    "typing": "Bizzer is typing..."
   },
   "footer": {
     "about": "About",

@@ -9,23 +9,30 @@ const api = axios.create({
   },
 })
 
-// Lazy import to avoid circular dependency
-// store -> authSlice -> authService -> api -> store
-const getStore = () => require('../store').store
-const getAuthActions = () => require('../store/slices/authSlice')
+// Store reference (set after store initialization to avoid circular import)
+let storeRef = null
+let authActions = null
+
+export const initializeApi = (store, actions) => {
+  storeRef = store
+  authActions = actions
+}
 
 // Request interceptor - Add auth token
 api.interceptors.request.use(
   (config) => {
-    const store = getStore()
-    const state = store.getState()
-    const token = state.auth.tokens?.access
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`
+    if (storeRef) {
+      const state = storeRef.getState()
+      const token = state.auth?.tokens?.access
+
+      if (token) {
+        config.headers.Authorization = `Bearer ${token}`
+      }
+
+      const language = state.language?.language || 'es'
+      config.headers['Accept-Language'] = language
     }
-    // Add language header
-    const language = state.language?.language || 'es'
-    config.headers['Accept-Language'] = language
+
     return config
   },
   (error) => Promise.reject(error)
@@ -37,25 +44,19 @@ api.interceptors.response.use(
   async (error) => {
     const originalRequest = error.config
 
-    // If 401 and not already retrying, try to refresh token
-    if (error.response?.status === 401 && !originalRequest._retry) {
+    if (error.response?.status === 401 && !originalRequest._retry && storeRef && authActions) {
       originalRequest._retry = true
 
       try {
-        const store = getStore()
-        const { refreshToken } = getAuthActions()
-        const result = await store.dispatch(refreshToken())
-        if (refreshToken.fulfilled.match(result)) {
-          // Retry original request with new token
+        const result = await storeRef.dispatch(authActions.refreshToken())
+
+        if (authActions.refreshToken.fulfilled.match(result)) {
           const newToken = result.payload.access
           originalRequest.headers.Authorization = `Bearer ${newToken}`
           return api(originalRequest)
         }
       } catch (refreshError) {
-        // Refresh failed, logout user
-        const store = getStore()
-        const { logout } = getAuthActions()
-        store.dispatch(logout())
+        storeRef.dispatch(authActions.logout())
         return Promise.reject(refreshError)
       }
     }

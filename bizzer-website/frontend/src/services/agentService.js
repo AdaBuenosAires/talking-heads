@@ -9,25 +9,14 @@ const agentApi = axios.create({
   },
 })
 
-// Lazy import to avoid circular dependency
-const getStore = () => require('../store').store
-
-// Request interceptor - Add auth token
-agentApi.interceptors.request.use(
-  (config) => {
-    const store = getStore()
-    const state = store.getState()
-    const token = state.auth.tokens?.access
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`
-    }
-    // Add language header
-    const language = state.language?.language || 'es'
-    config.headers['Accept-Language'] = language
-    return config
-  },
-  (error) => Promise.reject(error)
-)
+// Set auth token dynamically (avoids circular import)
+export const setAuthToken = (token) => {
+  if (token) {
+    agentApi.defaults.headers.common['Authorization'] = `Bearer ${token}`
+  } else {
+    delete agentApi.defaults.headers.common['Authorization']
+  }
+}
 
 const agentService = {
   async chat(message, sessionId = null) {
