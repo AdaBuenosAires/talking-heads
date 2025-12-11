@@ -9,14 +9,33 @@ const agentApi = axios.create({
   },
 })
 
-// Set auth token dynamically (avoids circular import)
-export const setAuthToken = (token) => {
-  if (token) {
-    agentApi.defaults.headers.common['Authorization'] = `Bearer ${token}`
-  } else {
-    delete agentApi.defaults.headers.common['Authorization']
-  }
+// Store reference - will be set after store creation
+let storeRef = null
+
+export const setAgentStore = (store) => {
+  storeRef = store
 }
+
+// Request interceptor - Add auth token
+agentApi.interceptors.request.use(
+  (config) => {
+    if (!storeRef) return config
+
+    const state = storeRef.getState()
+    const token = state.auth.tokens?.access
+
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`
+    }
+
+    // Add language header
+    const language = state.language?.language || 'es'
+    config.headers['Accept-Language'] = language
+
+    return config
+  },
+  (error) => Promise.reject(error)
+)
 
 const agentService = {
   async chat(message, sessionId = null) {
@@ -41,6 +60,7 @@ const agentService = {
     const formData = new FormData()
     formData.append('file', file)
     formData.append('metadata', JSON.stringify(metadata))
+
     const response = await agentApi.post('/knowledge/upload/', formData, {
       headers: {
         'Content-Type': 'multipart/form-data',

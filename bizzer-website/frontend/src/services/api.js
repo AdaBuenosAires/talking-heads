@@ -9,29 +9,28 @@ const api = axios.create({
   },
 })
 
-// Store reference (set after store initialization to avoid circular import)
+// Store reference - will be set after store creation
 let storeRef = null
-let authActions = null
 
-export const initializeApi = (store, actions) => {
+export const setStore = (store) => {
   storeRef = store
-  authActions = actions
 }
 
 // Request interceptor - Add auth token
 api.interceptors.request.use(
   (config) => {
-    if (storeRef) {
-      const state = storeRef.getState()
-      const token = state.auth?.tokens?.access
+    if (!storeRef) return config
 
-      if (token) {
-        config.headers.Authorization = `Bearer ${token}`
-      }
+    const state = storeRef.getState()
+    const token = state.auth.tokens?.access
 
-      const language = state.language?.language || 'es'
-      config.headers['Accept-Language'] = language
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`
     }
+
+    // Add language header
+    const language = state.language?.language || 'es'
+    config.headers['Accept-Language'] = language
 
     return config
   },
@@ -44,19 +43,25 @@ api.interceptors.response.use(
   async (error) => {
     const originalRequest = error.config
 
-    if (error.response?.status === 401 && !originalRequest._retry && storeRef && authActions) {
+    // If 401 and not already retrying, try to refresh token
+    if (error.response?.status === 401 && !originalRequest._retry && storeRef) {
       originalRequest._retry = true
 
       try {
-        const result = await storeRef.dispatch(authActions.refreshToken())
+        // Dynamic import to avoid circular dependency
+        const { refreshToken, logout } = await import('../store/slices/authSlice')
+        const result = await storeRef.dispatch(refreshToken())
 
-        if (authActions.refreshToken.fulfilled.match(result)) {
+        if (refreshToken.fulfilled.match(result)) {
+          // Retry original request with new token
           const newToken = result.payload.access
           originalRequest.headers.Authorization = `Bearer ${newToken}`
           return api(originalRequest)
         }
       } catch (refreshError) {
-        storeRef.dispatch(authActions.logout())
+        // Refresh failed, logout user
+        const { logout } = await import('../store/slices/authSlice')
+        storeRef.dispatch(logout())
         return Promise.reject(refreshError)
       }
     }

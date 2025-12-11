@@ -16,6 +16,8 @@ services:
     build:
       context: ./bizzer-website/backend
       dockerfile: Dockerfile
+      args:
+        - ENVIRONMENT=development
     command: python manage.py runserver 0.0.0.0:8000
     volumes:
       - ./bizzer-website/backend:/app
