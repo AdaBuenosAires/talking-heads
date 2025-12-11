@@ -15,7 +15,7 @@ services:
   website-backend:
     build:
       context: ./bizzer-website/backend
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.dev
     command: python manage.py runserver 0.0.0.0:8000
     volumes:
       - ./bizzer-website/backend:/app
@@ -30,7 +30,7 @@ services:
   website-frontend:
     build:
       context: ./bizzer-website/frontend
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.dev
     command: npm run dev -- --host 0.0.0.0
     volumes:
       - ./bizzer-website/frontend:/app
