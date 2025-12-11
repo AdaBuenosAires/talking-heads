@@ -217,6 +217,12 @@ Debería mostrar document_count > 0
 
 Pregunta algo relacionado en el chat - el agente debería usar esa info
 
+## Si queres verificar que Ollama esta corriendo, en otra terminal 
+
+docker compose ps | grep ollama
+
+Pero levanta solo. 
+
 ## License
 
 Proprietary - All rights reserved.
