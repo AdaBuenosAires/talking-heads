@@ -2,6 +2,7 @@ import { configureStore, combineReducers } from '@reduxjs/toolkit'
 import { persistStore, persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 import { setStore } from '../services/api'
+import { setAgentStore } from '../services/agentService'
 
 import authReducer from './slices/authSlice'
 import wizardReducer from './slices/wizardSlice'
@@ -38,5 +39,6 @@ export const store = configureStore({
 
 // Set store reference for api interceptors (avoids circular dependency)
 setStore(store)
+setAgentStore(store)
 
 export const persistor = persistStore(store)
