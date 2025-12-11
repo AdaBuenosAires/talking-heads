@@ -66,6 +66,14 @@ This repository contains:
 
    ```
 
+   O con rebuild para aplicar cambios 
+
+   ,,,,,,,,
+   
+   docker compose -f docker-compose.yml -f docker-compose.dev.yml up -d --build
+
+   ,,,,,,,,,,,,
+
 4. **Access the services**
    - Frontend: http://localhost:3000
    - Backend API: http://localhost:8000/api
