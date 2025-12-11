@@ -28,9 +28,10 @@ export default function WizardStep({ step, totalSteps }) {
   const quickWin = language === 'es' ? step.quick_win_es : step.quick_win_en
   const placeholder = language === 'es' ? step.placeholder_es : step.placeholder_en
 
-  // Get options with localized labels
-  const options = step.options?.map((opt) => ({
+  // Get options with localized labels and ensure each has a unique identifier
+  const options = step.options?.map((opt, index) => ({
     ...opt,
+    id: opt.id ?? opt.value ?? index,
     label: language === 'es' ? opt.label_es : opt.label_en,
   })) || []
 

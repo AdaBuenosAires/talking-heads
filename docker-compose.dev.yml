@@ -15,9 +15,7 @@ services:
   website-backend:
     build:
       context: ./bizzer-website/backend
-      dockerfile: Dockerfile
-      args:
-        - ENVIRONMENT=development
+      dockerfile: Dockerfile.dev
     command: python manage.py runserver 0.0.0.0:8000
     volumes:
       - ./bizzer-website/backend:/app
@@ -26,7 +24,6 @@ services:
     environment:
       - DJANGO_SETTINGS_MODULE=config.settings.development
       - DEBUG=True
-      - DATABASE_URL=postgresql://${POSTGRES_USER:-bizzer}:${POSTGRES_PASSWORD:-password}@db:5432/${POSTGRES_DB:-bizzer}
     ports:
       - "8000:8000"
 
@@ -34,6 +31,7 @@ services:
     build:
       context: ./bizzer-website/frontend
       dockerfile: Dockerfile.dev
+    command: npm run dev -- --host 0.0.0.0
     volumes:
       - ./bizzer-website/frontend:/app
       - /app/node_modules
