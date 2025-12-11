@@ -18,12 +18,22 @@ export default function TermsOfService() {
             These Terms of Service ("Terms") govern your access to and use of the services provided by:
           </p>
           <ul>
-            <li><strong>Company Name:</strong> Bizzer Network S.L.</li>
-            <li><strong>Registered Address:</strong> [Address], [City], [Postal Code], Spain</li>
-            <li><strong>Tax ID (CIF):</strong> [CIF Number]</li>
-            <li><strong>Commercial Registry:</strong> Registered in the Commercial Registry of [City]</li>
+            <li><strong>Company Name:</strong> Bizzer Inc.</li>
+            <li><strong>Registered Address:</strong> [PLACEHOLDER_US_ADDRESS], [PLACEHOLDER_US_CITY], [PLACEHOLDER_US_STATE] [PLACEHOLDER_US_ZIP], United States</li>
+            <li><strong>State of Incorporation:</strong> Delaware, USA</li>
+            <li><strong>EIN:</strong> [PLACEHOLDER_EIN]</li>
             <li><strong>Email:</strong> legal@bizzer.com</li>
-            <li><strong>Phone:</strong> [Phone Number]</li>
+            <li><strong>Phone:</strong> [PLACEHOLDER_PHONE]</li>
+          </ul>
+
+          <h3>EU Representative (Article 27 GDPR)</h3>
+          <p>
+            For users in the European Union, our designated representative pursuant to Article 27 of the GDPR is:
+          </p>
+          <ul>
+            <li><strong>Name:</strong> [PLACEHOLDER_EU_REP_NAME]</li>
+            <li><strong>Address:</strong> [PLACEHOLDER_EU_REP_ADDRESS], [PLACEHOLDER_EU_REP_CITY], [PLACEHOLDER_EU_REP_COUNTRY]</li>
+            <li><strong>Email:</strong> eu-representative@bizzer.com</li>
           </ul>
 
           <h2>2. Acceptance of Terms</h2>
@@ -34,7 +44,7 @@ export default function TermsOfService() {
             any of these terms, you must not use our services.
           </p>
           <p>
-            These Terms constitute a legally binding agreement between you and Bizzer Network S.L.
+            These Terms constitute a legally binding agreement between you and Bizzer Inc.
             regarding your use of our platform and services.
           </p>
 
@@ -50,7 +60,14 @@ export default function TermsOfService() {
             <li>Communication and project management tools</li>
           </ul>
 
-          <h2>4. User Registration and Accounts</h2>
+          <h2>4. Data Processing Location</h2>
+          <p>
+            To ensure compliance with European data protection regulations, all personal data of users
+            located in the European Economic Area (EEA) is processed and stored on servers located
+            within the European Union. Our EU data centers are located in [PLACEHOLDER_EU_DATACENTER_LOCATION].
+          </p>
+
+          <h2>5. User Registration and Accounts</h2>
           <p>
             To access certain features of our services, you must register for an account. When registering, you agree to:
           </p>
@@ -66,7 +83,7 @@ export default function TermsOfService() {
             to suspend or terminate accounts that violate these Terms.
           </p>
 
-          <h2>5. User Obligations and Prohibited Conduct</h2>
+          <h2>6. User Obligations and Prohibited Conduct</h2>
           <p>When using our services, you agree NOT to:</p>
           <ul>
             <li>Violate any applicable laws or regulations</li>
@@ -79,11 +96,11 @@ export default function TermsOfService() {
             <li>Use the services for any illegal or unauthorized purpose</li>
           </ul>
 
-          <h2>6. Intellectual Property Rights</h2>
+          <h2>7. Intellectual Property Rights</h2>
           <p>
             All content, features, and functionality of our services, including but not limited to
             text, graphics, logos, icons, images, software, and the compilation thereof, are the
-            exclusive property of Bizzer Network S.L. or its licensors and are protected by
+            exclusive property of Bizzer Inc. or its licensors and are protected by
             international copyright, trademark, and other intellectual property laws.
           </p>
           <p>
@@ -91,18 +108,18 @@ export default function TermsOfService() {
             and use our services for their intended purpose, subject to these Terms.
           </p>
 
-          <h2>7. Data Protection and Privacy</h2>
+          <h2>8. Data Protection and Privacy</h2>
           <p>
             Your privacy is important to us. Our collection and use of personal data is governed by
             our <Link to="/privacy" className="underline">Privacy Policy</Link>, which complies with
-            the General Data Protection Regulation (GDPR) and applicable Spanish data protection laws.
+            the General Data Protection Regulation (GDPR) for EU users and applicable US privacy laws.
           </p>
           <p>
             By using our services, you consent to the processing of your data as described in our
             Privacy Policy, where such processing is based on consent.
           </p>
 
-          <h2>8. Right of Withdrawal (Consumer Users)</h2>
+          <h2>9. Right of Withdrawal (EU Consumer Users)</h2>
           <p>
             If you are a consumer (a natural person acting for purposes outside your trade, business,
             craft, or profession) within the European Union, you have the right to withdraw from any
@@ -118,7 +135,7 @@ export default function TermsOfService() {
           </p>
           <div className="bg-light-bgSecondary dark:bg-dark-bgSecondary p-4 rounded-lg my-4">
             <p className="font-semibold">Model Withdrawal Form</p>
-            <p>To Bizzer Network S.L., [Address], legal@bizzer.com:</p>
+            <p>To Bizzer Inc., [PLACEHOLDER_US_ADDRESS], legal@bizzer.com:</p>
             <p>I hereby give notice that I withdraw from my contract for the provision of the following service: [describe service]</p>
             <p>Ordered on: [date] / Received on: [date]</p>
             <p>Name of consumer: [your name]</p>
@@ -133,18 +150,18 @@ export default function TermsOfService() {
             fully performed by us.
           </p>
 
-          <h2>9. Pricing and Payment</h2>
+          <h2>10. Pricing and Payment</h2>
           <p>
-            All prices displayed on our platform are shown in Euros (EUR) and include applicable taxes
-            (VAT) unless otherwise stated. For business users (B2B), prices may be shown excluding VAT
-            where applicable.
+            Prices are displayed in US Dollars (USD) for US users and Euros (EUR) for EU users.
+            All prices for EU consumers include applicable taxes (VAT) unless otherwise stated.
+            For business users (B2B), prices may be shown excluding VAT where applicable.
           </p>
           <p>
             We reserve the right to change our pricing at any time, but changes will not affect orders
             already placed. Payment terms and methods are specified during the checkout process.
           </p>
 
-          <h2>10. Warranties and Disclaimers</h2>
+          <h2>11. Warranties and Disclaimers</h2>
           <p>
             We strive to provide reliable and high-quality services. However, to the extent permitted
             by applicable law:
@@ -157,12 +174,12 @@ export default function TermsOfService() {
           <p>
             <strong>For consumers in the European Union:</strong> These disclaimers do not affect your
             statutory rights under applicable consumer protection laws, including the legal guarantee
-            of conformity for digital services.
+            of conformity for digital services under EU Directive 2019/770.
           </p>
 
-          <h2>11. Limitation of Liability</h2>
+          <h2>12. Limitation of Liability</h2>
           <p>
-            To the maximum extent permitted by applicable law, Bizzer Network S.L. shall not be liable
+            To the maximum extent permitted by applicable law, Bizzer Inc. shall not be liable
             for any indirect, incidental, special, consequential, or punitive damages, including loss
             of profits, data, or goodwill.
           </p>
@@ -176,15 +193,16 @@ export default function TermsOfService() {
             shall not exceed the amount paid by you to us in the twelve (12) months preceding the claim.
           </p>
 
-          <h2>12. Indemnification</h2>
+          <h2>13. Indemnification</h2>
           <p>
-            You agree to indemnify, defend, and hold harmless Bizzer Network S.L., its officers,
+            You agree to indemnify, defend, and hold harmless Bizzer Inc., its officers,
             directors, employees, agents, and affiliates from and against any claims, damages, losses,
             liabilities, costs, and expenses (including legal fees) arising from your use of our
-            services or violation of these Terms.
+            services or violation of these Terms. This clause does not apply to EU consumers to the
+            extent prohibited by applicable consumer protection laws.
           </p>
 
-          <h2>13. Modifications to Terms</h2>
+          <h2>14. Modifications to Terms</h2>
           <p>
             We reserve the right to modify these Terms at any time. We will notify you of any material
             changes by posting the updated Terms on our platform and updating the "Last updated" date.
@@ -194,7 +212,7 @@ export default function TermsOfService() {
             Your continued use of our services after that period constitutes acceptance of the modified Terms.
           </p>
 
-          <h2>14. Termination</h2>
+          <h2>15. Termination</h2>
           <p>
             You may terminate your account at any time by contacting us at legal@bizzer.com. Upon
             termination, your right to use our services will immediately cease.
@@ -205,25 +223,24 @@ export default function TermsOfService() {
             termination shall survive.
           </p>
 
-          <h2>15. Governing Law and Jurisdiction</h2>
+          <h2>16. Governing Law and Jurisdiction</h2>
           <p>
-            These Terms shall be governed by and construed in accordance with the laws of Spain,
-            without regard to its conflict of law provisions, and in compliance with applicable
-            European Union law.
+            <strong>For US users:</strong> These Terms shall be governed by and construed in accordance
+            with the laws of the State of Delaware, United States, without regard to its conflict of
+            law provisions.
           </p>
           <p>
-            <strong>For consumers:</strong> If you are a consumer residing in the European Union, you
+            <strong>For EU consumers:</strong> If you are a consumer residing in the European Union, you
             will benefit from any mandatory provisions of the law of the country in which you are
             resident. Nothing in these Terms affects your rights as a consumer to rely on such mandatory
-            provisions of local law.
+            provisions of local law. Any disputes may be brought before the courts of your country of residence.
           </p>
           <p>
-            <strong>Jurisdiction:</strong> Any disputes arising from these Terms shall be submitted to
-            the courts of [City], Spain, except that consumers may bring proceedings in the courts of
-            their country of residence.
+            <strong>For EU business users:</strong> Disputes shall be subject to the exclusive jurisdiction
+            of the courts of [PLACEHOLDER_EU_REP_COUNTRY], or at our option, the courts of Delaware, USA.
           </p>
 
-          <h2>16. Alternative Dispute Resolution</h2>
+          <h2>17. Alternative Dispute Resolution (EU Users)</h2>
           <p>
             In accordance with Regulation (EU) No 524/2013, we inform you that the European Commission
             provides an Online Dispute Resolution (ODR) platform, which you can access at:{' '}
@@ -240,11 +257,11 @@ export default function TermsOfService() {
             Our email address for ODR purposes is: legal@bizzer.com
           </p>
           <p>
-            We are willing to participate in out-of-court dispute resolution procedures before a
-            consumer arbitration body where required by law or where we consider it appropriate.
+            We are committed to resolving disputes amicably and are willing to participate in
+            out-of-court dispute resolution procedures before a consumer arbitration body.
           </p>
 
-          <h2>17. Severability</h2>
+          <h2>18. Severability</h2>
           <p>
             If any provision of these Terms is held to be invalid, illegal, or unenforceable, the
             remaining provisions shall continue in full force and effect. The invalid provision shall
@@ -252,28 +269,28 @@ export default function TermsOfService() {
             of the original provision.
           </p>
 
-          <h2>18. Entire Agreement</h2>
+          <h2>19. Entire Agreement</h2>
           <p>
             These Terms, together with our Privacy Policy and Cookie Policy, constitute the entire
-            agreement between you and Bizzer Network S.L. regarding your use of our services and
+            agreement between you and Bizzer Inc. regarding your use of our services and
             supersede any prior agreements.
           </p>
 
-          <h2>19. Language</h2>
+          <h2>20. Language</h2>
           <p>
             These Terms are provided in English and Spanish. In case of any discrepancy between
-            language versions, the Spanish version shall prevail for users in Spain and the English
-            version shall prevail for other users.
+            language versions, the English version shall prevail.
           </p>
 
-          <h2>20. Contact Information</h2>
+          <h2>21. Contact Information</h2>
           <p>
             For any questions regarding these Terms of Service, please contact us at:
           </p>
           <ul>
             <li><strong>Email:</strong> legal@bizzer.com</li>
-            <li><strong>Address:</strong> Bizzer Network S.L., [Address], [City], [Postal Code], Spain</li>
-            <li><strong>Phone:</strong> [Phone Number]</li>
+            <li><strong>US Address:</strong> Bizzer Inc., [PLACEHOLDER_US_ADDRESS], [PLACEHOLDER_US_CITY], [PLACEHOLDER_US_STATE] [PLACEHOLDER_US_ZIP], USA</li>
+            <li><strong>EU Representative:</strong> [PLACEHOLDER_EU_REP_NAME], [PLACEHOLDER_EU_REP_ADDRESS], [PLACEHOLDER_EU_REP_CITY], [PLACEHOLDER_EU_REP_COUNTRY]</li>
+            <li><strong>Phone:</strong> [PLACEHOLDER_PHONE]</li>
           </ul>
           <p>
             We will endeavor to respond to all inquiries within 30 days.

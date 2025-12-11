@@ -14,7 +14,7 @@ export default function CookiePolicy() {
           </p>
 
           <p>
-            This Cookie Policy explains how Bizzer Network S.L. ("Bizzer", "we", "us", or "our")
+            This Cookie Policy explains how Bizzer Inc. ("Bizzer", "we", "us", or "our")
             uses cookies and similar tracking technologies on our website and services. This policy
             should be read together with our{' '}
             <Link to="/privacy" className="underline">Privacy Policy</Link>.
@@ -23,9 +23,16 @@ export default function CookiePolicy() {
           <h2>1. Data Controller</h2>
           <p>The data controller responsible for cookies placed on this website is:</p>
           <ul>
-            <li><strong>Company Name:</strong> Bizzer Network S.L.</li>
-            <li><strong>Registered Address:</strong> [Address], [City], [Postal Code], Spain</li>
+            <li><strong>Company Name:</strong> Bizzer Inc.</li>
+            <li><strong>Registered Address:</strong> [PLACEHOLDER_US_ADDRESS], [PLACEHOLDER_US_CITY], [PLACEHOLDER_US_STATE] [PLACEHOLDER_US_ZIP], United States</li>
             <li><strong>Email:</strong> privacy@bizzer.com</li>
+          </ul>
+
+          <h3>EU Representative (Article 27 GDPR)</h3>
+          <ul>
+            <li><strong>Name:</strong> [PLACEHOLDER_EU_REP_NAME]</li>
+            <li><strong>Address:</strong> [PLACEHOLDER_EU_REP_ADDRESS], [PLACEHOLDER_EU_REP_CITY], [PLACEHOLDER_EU_REP_COUNTRY]</li>
+            <li><strong>Email:</strong> eu-representative@bizzer.com</li>
           </ul>
 
           <h2>2. What Are Cookies?</h2>
@@ -148,6 +155,7 @@ export default function CookiePolicy() {
           </table>
           <p className="text-sm">
             <strong>Third-party provider information:</strong> Google Analytics is provided by Google LLC.
+            For EU users, we use Google Analytics with IP anonymization enabled.
             For more information, see{' '}
             <a
               href="https://policies.google.com/privacy"
@@ -370,20 +378,17 @@ export default function CookiePolicy() {
             legislation, or our data practices. When we make changes, we will update the "Last
             updated" date at the top of this policy.
           </p>
-          <p>
-            We encourage you to periodically review this page to stay informed about our use of cookies.
-          </p>
 
           <h2>9. Your Rights</h2>
           <p>
-            Under GDPR and applicable data protection laws, you have rights regarding your personal
+            Under GDPR (for EU users) and applicable US privacy laws, you have rights regarding your personal
             data collected through cookies, including:
           </p>
           <ul>
             <li>Right to access information about cookies we use</li>
             <li>Right to withdraw consent</li>
             <li>Right to erasure of data collected via cookies</li>
-            <li>Right to lodge a complaint with a supervisory authority</li>
+            <li>Right to lodge a complaint with a supervisory authority (EU users)</li>
           </ul>
           <p>
             For more information about your rights, please see our{' '}
@@ -397,25 +402,29 @@ export default function CookiePolicy() {
           <ul>
             <li><strong>Email:</strong> privacy@bizzer.com</li>
             <li><strong>Data Protection Officer:</strong> dpo@bizzer.com</li>
-            <li><strong>Address:</strong> Bizzer Network S.L., [Address], [City], [Postal Code], Spain</li>
+            <li><strong>EU Representative:</strong> eu-representative@bizzer.com</li>
+            <li><strong>US Address:</strong> Bizzer Inc., [PLACEHOLDER_US_ADDRESS], [PLACEHOLDER_US_CITY], [PLACEHOLDER_US_STATE] [PLACEHOLDER_US_ZIP], USA</li>
+            <li><strong>EU Address:</strong> [PLACEHOLDER_EU_REP_NAME], [PLACEHOLDER_EU_REP_ADDRESS], [PLACEHOLDER_EU_REP_CITY], [PLACEHOLDER_EU_REP_COUNTRY]</li>
           </ul>
 
-          <h2>11. Supervisory Authority</h2>
+          <h2>11. Supervisory Authority (EU Users)</h2>
           <p>
-            You have the right to lodge a complaint with a supervisory authority if you believe our
-            use of cookies violates data protection laws. In Spain, the competent authority is:
+            If you believe our use of cookies violates data protection laws, you have the right to
+            lodge a complaint with a supervisory authority in the EU. You may contact the supervisory
+            authority in your country of residence or in [PLACEHOLDER_EU_REP_COUNTRY] where our EU
+            representative is located.
           </p>
-          <div className="bg-light-bgSecondary dark:bg-dark-bgSecondary p-4 rounded-lg my-4">
-            <p><strong>Agencia Española de Protección de Datos (AEPD)</strong></p>
-            <p>C/ Jorge Juan, 6</p>
-            <p>28001 Madrid, Spain</p>
-            <p>
-              Website:{' '}
-              <a href="https://www.aepd.es" target="_blank" rel="noopener noreferrer" className="underline">
-                www.aepd.es
-              </a>
-            </p>
-          </div>
+          <p>
+            A list of EU supervisory authorities is available at:{' '}
+            <a
+              href="https://edpb.europa.eu/about-edpb/about-edpb/members_en"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline"
+            >
+              https://edpb.europa.eu/about-edpb/about-edpb/members_en
+            </a>
+          </p>
         </div>
       </div>
     </div>
