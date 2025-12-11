@@ -99,6 +99,8 @@ class WizardSession(models.Model):
     def progress_percentage(self):
         if self.status == self.Status.COMPLETED:
             return 100
+        if self.total_steps == 0:
+            return 0
         return int((self.current_step - 1) / self.total_steps * 100)
 
 
