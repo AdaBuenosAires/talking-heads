@@ -1,5 +1,4 @@
 import axios from 'axios'
-import { store } from '../store'
 
 const AGENTS_URL = import.meta.env.VITE_AGENTS_URL || '/agents'
 
@@ -10,10 +9,19 @@ const agentApi = axios.create({
   },
 })
 
+// Store reference - will be set after store creation
+let storeRef = null
+
+export const setAgentStore = (store) => {
+  storeRef = store
+}
+
 // Request interceptor - Add auth token
 agentApi.interceptors.request.use(
   (config) => {
-    const state = store.getState()
+    if (!storeRef) return config
+
+    const state = storeRef.getState()
     const token = state.auth.tokens?.access
 
     if (token) {

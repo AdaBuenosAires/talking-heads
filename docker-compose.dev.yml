@@ -1,17 +1,13 @@
 version: '3.8'
-
 # Development overrides
 # Usage: docker-compose -f docker-compose.yml -f docker-compose.dev.yml up
-
 services:
   db:
     ports:
       - "5432:5432"
-
   redis:
     ports:
       - "6379:6379"
-
   website-backend:
     build:
       context: ./bizzer-website/backend
@@ -24,14 +20,13 @@ services:
     environment:
       - DJANGO_SETTINGS_MODULE=config.settings.development
       - DEBUG=True
+      - DATABASE_URL=postgresql://${POSTGRES_USER:-bizzer}:${POSTGRES_PASSWORD:-password}@db:5432/${POSTGRES_DB:-bizzer}
     ports:
       - "8000:8000"
-
   website-frontend:
     build:
       context: ./bizzer-website/frontend
-      dockerfile: Dockerfile
-    command: npm run dev -- --host 0.0.0.0
+      dockerfile: Dockerfile.dev
     volumes:
       - ./bizzer-website/frontend:/app
       - /app/node_modules
@@ -40,7 +35,6 @@ services:
     environment:
       - VITE_API_URL=http://localhost:8000/api
       - VITE_AGENTS_URL=http://localhost:8001
-
   agents:
     command: uvicorn app.main:app --host 0.0.0.0 --port 8001 --reload
     volumes:
@@ -50,12 +44,9 @@ services:
       - "8001:8001"
     environment:
       - DEBUG=True
-
   ollama:
     ports:
       - "11434:11434"
-
-  # Disable nginx in development
   nginx:
     profiles:
       - production

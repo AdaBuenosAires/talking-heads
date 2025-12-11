@@ -11,13 +11,10 @@ const authService = {
     return response.data
   },
 
-  async logout(refreshToken) {
-    try {
-      await api.post('/auth/jwt/blacklist/', { refresh: refreshToken })
-    } catch (error) {
-      // Ignore logout errors
-      console.warn('Logout error:', error)
-    }
+  async logout() {
+    // Token invalidation is handled client-side by removing from storage
+    // Server-side blacklisting is optional and not implemented
+    return Promise.resolve()
   },
 
   async refreshToken(refreshToken) {

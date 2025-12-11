@@ -5,8 +5,12 @@ import { PersistGate } from 'redux-persist/integration/react'
 import { BrowserRouter } from 'react-router-dom'
 import App from './App'
 import { store, persistor } from './store'
+import { setStore } from './services/api'
 import './i18n'
 import './styles/globals.css'
+
+// Initialize API with store reference (breaks circular dependency)
+setStore(store)
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
