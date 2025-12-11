@@ -24,6 +24,7 @@ services:
     environment:
       - DJANGO_SETTINGS_MODULE=config.settings.development
       - DEBUG=True
+      - DATABASE_URL=postgresql://${POSTGRES_USER:-bizzer}:${POSTGRES_PASSWORD:-password}@db:5432/${POSTGRES_DB:-bizzer}
     ports:
       - "8000:8000"
 
