@@ -166,8 +166,36 @@
   },
   "cookies": {
     "message": "We use cookies to improve your experience. By continuing to use this site, you accept our",
-    "policy": "cookie policy",
+    "policy": "Cookie Policy",
     "accept": "Accept",
-    "decline": "Decline"
+    "decline": "Decline",
+    "acceptAll": "Accept All",
+    "rejectAll": "Reject All",
+    "settings": "Cookie Settings",
+    "savePreferences": "Save Preferences",
+    "required": "Required",
+    "banner": {
+      "title": "We value your privacy",
+      "description": "We use cookies to enhance your browsing experience, serve personalized content, and analyze our traffic. By clicking \"Accept All\", you consent to our use of cookies."
+    },
+    "settingsDescription": "Manage your cookie preferences below. You can enable or disable different types of cookies. Note that disabling some cookies may affect your experience on our website.",
+    "categories": {
+      "necessary": {
+        "title": "Strictly Necessary",
+        "description": "Essential for the website to function. Cannot be disabled."
+      },
+      "analytics": {
+        "title": "Analytics",
+        "description": "Help us understand how visitors interact with our website."
+      },
+      "functionality": {
+        "title": "Functionality",
+        "description": "Enable enhanced features and personalization."
+      },
+      "marketing": {
+        "title": "Marketing",
+        "description": "Used to display relevant advertisements."
+      }
+    }
   }
 }

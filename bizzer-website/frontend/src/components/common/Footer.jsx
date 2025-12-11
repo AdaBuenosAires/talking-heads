@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
+import { openCookieSettings } from './CookieConsent'
 
 export default function Footer() {
   const { t } = useTranslation()
@@ -78,6 +79,14 @@ export default function Footer() {
                 <Link to="/cookies" className="hover:text-light-text dark:hover:text-dark-text transition-colors">
                   {t('footer.cookies')}
                 </Link>
+              </li>
+              <li>
+                <button
+                  onClick={openCookieSettings}
+                  className="hover:text-light-text dark:hover:text-dark-text transition-colors text-left"
+                >
+                  {t('cookies.settings')}
+                </button>
               </li>
             </ul>
           </div>
