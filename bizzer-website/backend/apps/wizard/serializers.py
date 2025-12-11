@@ -112,7 +112,7 @@ class WizardSessionSerializer(serializers.ModelSerializer):
 class WizardSessionCreateSerializer(serializers.Serializer):
     """Serializer for creating wizard sessions"""
 
-    session_id = serializers.CharField(required=False)
+    session_id = serializers.CharField(required=False, allow_null=True, allow_blank=True)
 
 
 class DiagnosisResultSerializer(serializers.ModelSerializer):
