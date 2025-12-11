@@ -36,6 +36,10 @@ echo "Database is ready!"
 echo "Running migrations..."
 python manage.py migrate --noinput
 
+# Seed wizard steps (idempotent - safe to run multiple times)
+echo "Seeding wizard steps..."
+python manage.py seed_wizard_steps
+
 # Load initial data if needed
 if [ "$LOAD_INITIAL_DATA" = "true" ]; then
     echo "Loading initial data..."
