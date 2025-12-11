@@ -1,10 +1,13 @@
 # Bizzer Website Backend Dockerfile
 FROM python:3.12-slim
 
+# Build argument for environment
+ARG ENVIRONMENT=production
+
 # Set environment variables
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
-ENV DJANGO_SETTINGS_MODULE=config.settings.production
+ENV DJANGO_SETTINGS_MODULE=config.settings.${ENVIRONMENT}
 
 # Set work directory
 WORKDIR /app
@@ -17,7 +20,7 @@ RUN apt-get update && apt-get install -y \
 
 # Install Python dependencies
 COPY requirements/ /app/requirements/
-RUN pip install --no-cache-dir -r requirements/production.txt
+RUN pip install --no-cache-dir -r requirements/${ENVIRONMENT}.txt
 
 # Copy project
 COPY . /app/
