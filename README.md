@@ -181,6 +181,42 @@ OPENAI_API_KEY=your-key
 3. Test locally with `docker-compose.dev.yml`
 4. Submit pull request
 
+
+## Como cargar .txt para la base de conocimiento que usa el asistente inteligente 
+El flujo está conectado:
+
+POST /agents/knowledge/upload (archivo .txt)
+         ↓
+DocumentProcessor.process_file()
+         ↓
+Chunking (1000 chars, 200 overlap)
+         ↓
+Guarda en ChromaDB
+         ↓
+Cuando chateas:
+         ↓
+BizzerAgent.chat() → retriever.search(mensaje) → top 3 docs
+         ↓
+Se incluyen en el system prompt del LLM
+
+Cómo probarlo:
+Crea un archivo .txt con la información que quieras (ej: info_bizzer.txt)
+
+Súbelo via API (necesitas estar autenticado):
+
+curl -X POST "http://localhost/agents/knowledge/upload" \
+  -H "Authorization: Bearer TU_TOKEN_JWT" \
+  -F "file=@info_bizzer.txt"
+
+Verifica que se guardó:
+
+curl "http://localhost/agents/knowledge/stats" \
+  -H "Authorization: Bearer TU_TOKEN_JWT"
+
+Debería mostrar document_count > 0
+
+Pregunta algo relacionado en el chat - el agente debería usar esa info
+
 ## License
 
 Proprietary - All rights reserved.
