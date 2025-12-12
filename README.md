@@ -66,6 +66,12 @@ This repository contains:
 
    ```
 
+   o
+
+   docker compose -f docker-compose.yml -f docker-compose.dev.yml build --no-cache website-frontend
+   docker compose -f docker-compose.yml -f docker-compose.dev.yml up -d
+
+
    O con rebuild para aplicar cambios 
 
    ,,,,,,,,
@@ -222,6 +228,11 @@ Pregunta algo relacionado en el chat - el agente debería usar esa info
 docker compose ps | grep ollama
 
 Pero levanta solo. 
+
+
+## Detener  contenedor 
+
+docker compose down
 
 ## License
 
