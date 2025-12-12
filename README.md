@@ -61,18 +61,105 @@ This repository contains:
    ```
 
 3. **Start development environment**
+
+Levantar asi: 
+
    ```bash
-   docker compose -f docker-compose.yml -f docker-compose.dev.yml up -d
+
+   docker compose \
+  -f docker-compose.yml \
+  -f docker-compose.dev.yml \
+  up -d
 
    ```
 
-   O con rebuild para aplicar cambios 
+   Ojo: El down, up y build deben usar el MISMO conjunto de archivos -f: 
+
+   Docker Compose no “recuerda” qué archivos usaste al levantar. con rebuild para aplicar cambios.
 
    ,,,,,,,,
    
-   docker compose -f docker-compose.yml -f docker-compose.dev.yml up -d --build
+
+   El down correcto : 
+
+   ,,,,,,,
+
+  
+   docker compose \
+  -f docker-compose.yml \
+  -f docker-compose.dev.yml \
+  down
+
+  '''''''''
+
+   Para bajar too volumenes: 
+
+   docker compose \
+  -f docker-compose.yml \
+  -f docker-compose.dev.yml \
+  down -v
 
    ,,,,,,,,,,,,
+
+   Para re build: 
+
+   ,,,,,,,,,
+
+   docker compose \
+  -f docker-compose.yml \
+  -f docker-compose.dev.yml \
+  build
+
+   docker compose \
+  -f docker-compose.yml \
+  -f docker-compose.dev.yml \
+  up -d
+
+
+   ,,,,,,,,,,,
+
+   Para levantar sin huerfanos: 
+
+   docker compose -f docker-compose.yml -f docker-compose.dev.yml up -d --build --remove-orphans
+
+
+
+## ver logs reales de ollama (motor del proyecto): 
+
+docker compose logs ollama --tail 50
+docker compose logs agents --tail 100
+
+
+Qué ves con esto
+
+Si Ollama levantó
+
+Si escucha en 11434
+
+Si usa CPU o GPU
+
+Si entra en low vram mode
+
+Si hay errores de arranque
+
+
+=======
+
+
+## ver que modelos estan cargados / disponibles 
+
+curl http://localhost:11434/api/tags
+
+## ptobar inferencia real - health check: 
+
+
+curl http://localhost:11434/api/generate \
+  -H "Content-Type: application/json" \
+  -d '{"model":"gemma2:2b","prompt":"decime ok en una palabra","stream":false}'
+
+
+==========
+
 
 4. **Access the services**
    - Frontend: http://localhost:3000
