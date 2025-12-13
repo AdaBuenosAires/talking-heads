@@ -61,6 +61,7 @@ This repository contains:
    ```
 
 3. **Start development environment**
+## En diferentes tabs 
 
 Levantar asi: 
 
@@ -151,7 +152,6 @@ Si hay errores de arranque
 curl http://localhost:11434/api/tags
 
 ## ptobar inferencia real - health check: 
-
 
 curl http://localhost:11434/api/generate \
   -H "Content-Type: application/json" \
